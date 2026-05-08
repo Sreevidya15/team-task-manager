@@ -44,6 +44,10 @@ const taskValidation = [
 ];
 
 // Routes
+router.get('/', (req, res) => {
+  res.status(200).json({ message: 'Tasks route working 🚀' });
+});
+
 router
   .route('/')
   .get(protect, getTasks)

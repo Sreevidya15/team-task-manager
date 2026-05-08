@@ -1,8 +1,16 @@
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
+  const uri = process.env.MONGO_URI;
+
+  if (!uri || typeof uri !== 'string') {
+    console.error('Database connection failed: MONGO_URI is not defined or invalid.');
+    console.error('Current MONGO_URI value:', uri);
+    process.exit(1);
+  }
+
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
+    const conn = await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
